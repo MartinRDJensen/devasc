@@ -33,7 +33,7 @@ The Tenant Policy consists of:
 - Contracts, define the services and policies that are applied to an EPG. Contracts can be used for service redirection to an L4-L7 device, assiging QoS values and applying ACL rules.
 - Filters, objects that define protocols (TCP, UDP, ICMP, and so on) and ports. Filter objects can contain multiple protocols and ports. Contracts can consume multiple Filters.
 
-##The Object Model
+###The Object Model
 
 - ACI operates on an object-based model, which is used to configure and manage ACI.
 - Object model has two categories, the logical and concrete.
@@ -42,7 +42,7 @@ The Tenant Policy consists of:
 - Each MO has a Relative Name (RN) which identifies an object from other child objects of the same parent. Each RN has to be unique within the parent object. Relative names begin with a **class prefix** and is based off the object's class type.
 - Distinguished names are the unique name of objects in the MIT. It contains a series of RNs starting with the root and attaching each child RN down to the object.
 
-#ACI REST API
+###ACI REST API
 - Supports all four CRUD methods.
 - To login you use HTTP post with a JSON body:
 ```
