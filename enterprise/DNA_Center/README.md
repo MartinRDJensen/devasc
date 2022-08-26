@@ -1,4 +1,17 @@
 # DNA Center Notes
+There are different categories of the APIs:
+- Know Your Network
+  - Can be used to discover details about clients, sites, topology and devices. Can also add devices to the network and export device data.
+- Site Management
+  - Helps provision enterprise networks with zero touch deployment and manage the activation and distribution of software images in the network.
+- Connectivity
+  - Provide the mechanism to configure and manage non-fabric wireless networks as a single step process.
+- Operational Tasks
+  - Provide programmatic access to DNA Center tasks such as configure and manage CLI templates, discover network devices, configure network settings and path trace through the network.
+- Policy
+  - Allow you programmatic access to create policies that reflect your organization's business intent for a particular aspect of the network, such as network access.
+- Ecosystem Integrations
+  - Provide details of the various third party integrations that are supported 
 
 ## Authentication
 To authenticate to the DNA Center you would send a POST request to:
@@ -145,6 +158,96 @@ The following is commonly used APIs of the Cisco DNA Center Platform:
 - *https://{}/api/v1/interface*, gets every interface on every network device.
 - *https://{}/api/v1/host*, gets the hostname, the id of the vlan, the IP address and Mac address of the host, and the IP address of the network device to which the host is connected and much more.
 - *https://{}/api/v1/flow-analysis*, the path trace endpoint to trace a path between two IP addresses. Waits for analysis to complete and returns the results.
+
+### Creating the troubleshooting script
+Reference:
+```
+https://github.com/CiscoDevNet/dnac-python-path-trace/blob/master/path_trace.py
+```
+
+## DNAC Command Runner
+Used to initiate remote execution of OS native command line instructions. Can be accessed using GUI and the Intent API.
+
+First step would be to figure out the set of valid read-only commands using the Intent API:
+```
+https://{{dnacenter}}:{{port}}/dna/intent/api/v1/network-device-poller/cli/legit-reads
+```
+
+Python sample of it being used:
+```
+"""
+Some elements are omitted such as where the token comes from, host, port etc.
+But these are not that important for the illustration.
+"""
+
+url = "https://{}:{}/api/v1/network-device-poller/cli/legit-reads".format(host,port)
+headers = {
+"X-Auth-Token": token
+}
+response = requests.get(url, headers=headers, verify=False)
+response.raise_for_status()
+print("Exec commands supported:")
+print(json.dumps(response.json()['response'], indent=4))
+```
+Would return something like:
+```
+Exec commands supported:
+[
+	.
+	.
+	.
+	"mping",
+	"sh",
+	"standby",
+	"start-chat",
+	"systat",
+	.
+	.
+	.
+]
+
+```
+Actually executing remote commands and obtaining the results consist of 4 code steps:
+- Obtain target device UUID: GET .../network-device/ip-address/{ipAddress}
+- Initiate the remote commands. (Returns: taskId): POST .../network-device-poller/cli/read-request
+- Wait until the task completes: (On completion, returns: fileId): GET '.../task/{taskId}
+- Obtain the results: GET /dna/intent/api/v1/file/{fileId}
+
+## The Template Programmer and API
+Template programmer is used to apply templates to devices. Templates are organized into *projects* containers. To view the tempaltes go to Cisco DNA Center -> login -> tools and then template editor.
+
+To get all versions of a template use the following API:
+```
+dna/intent/api/v1/template-programmer/template/version/{templateId}
+```
+
+To see the variables that a template requires use the following API:
+```
+dna/intent/api/v1/template-programmer/template/{templateId}
+```
+To deploy a template you would create a POST request to:
+```
+/v1/template-programmer/template/deploy
+```
+However, this endpoint requires a payload containing template, devices and variables so something like:
+```
+body = {
+        "templateId": "1baa7cb1-43af-4e1e-a91b-942856d7e3ec",
+        "targetInfo": [
+            {
+                "id": "10.10.22.70",
+                "type": "MANAGED_DEVICE_IP",
+                "params": {"description": "changed by DNAC", "interface": "TenGigabitEthernet1/0/24"}
+            }
+        ]
+    }
+```
+After the template is deployed you can check its status by polling it with a GET request to:
+```
+/v1/template-programmer/template/deploy/status/{deploymentId}
+```
+
+
 
 
 
