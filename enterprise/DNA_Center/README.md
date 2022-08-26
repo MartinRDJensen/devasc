@@ -123,6 +123,21 @@ if name == "main":
 
 ```
 
+## Visibility and Assurance With Path Trace
+Path trace can show how traffic goes from point A to point B across the network. You can perform a path trace between two nodes within your network between a specified source device and a specified destination device. 
+
+When you initiate a path trace, the Cisco DNA Center Platform APIs evaluate and collects network topology and routing data from the discovered devices. It then uses this data to calculate a path between the source and destination or Layer 3 interfaces, and presents the path in a path trace. The topology includes the path direction and the devices along the path including their IP addresses. The display also shows the protocol of the devices along the path: Switched, STP, ECMP, Routed, Trace Route, or other source types.
+
+When Cisco DNA Center Platform discovers the network it builds an inventory of network devices, interfaces and hosts. These devices can have locations and tags.
+
+
+```mermaid
+graph TD;
+    /network-device-->/location;
+    /network-device-->/tag;
+    /network-device-->/interface
+    /network-device-->/host
+```
 
 
 
