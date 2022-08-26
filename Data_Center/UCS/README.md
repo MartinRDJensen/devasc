@@ -44,7 +44,7 @@ For the REST API you must pass the access key as the **X-Cloupia-Request-Key** h
     ```
     http://SERVER/app/api/rest?formatType=json&opName=operationName&opData=
 operationData
-```
+    ```
     - For XML format we have:
     ```
     http://server/cloupia/api-v2/group
