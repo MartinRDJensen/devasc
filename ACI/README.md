@@ -206,6 +206,41 @@ Common ACI Module parameters are:
 - description
 
 ## ACI and Terraform
+Terraform is a way to automate ACI. The benefit is that the, specifically for Terraform resources and data sources for ACI, is that it removes the need to write custom scripts.
+
+Terraform resources are pre-written blocks of code that does a specific task. Saves you time from researching API requests, developing code to make proper API requests, and then testing and debugging it.
+
+### The Terraform Provider
+- is a set of resources and data sources that allow the Terraform binary to ineract with third-party system.
+- Use **resource** to add, modify, or destroy a unit of infrastructure.
+- Use **data source** to represent an existing unit of infrastructure to be able to interpolate or reference it in other resources or data sources.
+- For **ACI Terraform Provider** these resources and data sources represent the ACI Configuration elements of the APIC.
+
+To use a Terraform provider you have to define it in the Terraform plan. The **Terraform plan** is a configuration file which describes the providers, resources, and data sources that represent infrastructure using **HashiCorp Configuration Language (HCL)**.
+The default Terraform plan is named main.tf
+
+Example:
+```
+terraform {
+  required_providers {
+    aci = {
+      source = "CiscoDevNet/aci"
+    }
+  }
+}
+
+# Configure the provider with your Cisco APIC credentials.
+provider "aci" {
+  # APIC Username
+  username = var.user.username
+  # APIC Password
+  password = var.user.password
+  # APIC URL
+  url      = var.user.url
+  insecure = true
+}
+```
+
 
 
 
