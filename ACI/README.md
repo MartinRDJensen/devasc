@@ -33,7 +33,8 @@ The Tenant Policy consists of:
 - Contracts, define the services and policies that are applied to an EPG. Contracts can be used for service redirection to an L4-L7 device, assiging QoS values and applying ACL rules.
 - Filters, objects that define protocols (TCP, UDP, ICMP, and so on) and ports. Filter objects can contain multiple protocols and ports. Contracts can consume multiple Filters.
 
-#The Object Model
+##The Object Model
+
 - ACI operates on an object-based model, which is used to configure and manage ACI.
 - Object model has two categories, the logical and concrete.
 - Changes are made to the logical model and pushed down to the concrete model where the hardware and software are programmed as needed.
@@ -166,8 +167,8 @@ app_query.propFilter = 'eq(fvAp.name, "Save_The_Planet")'
 save_the_planet_app = session.query(app_query)
 
 print(save_the_planet_app[0].name) #returns the name 
-
-#ACI Websockets
+```
+##ACI Websockets
 Enables bi-directional communication between two hosts.
 - enables the server to send and push messages to the client
 - use a single TCP connection for all communication
@@ -207,7 +208,6 @@ Common ACI Module parameters are:
 ## ACI and Terraform
 
 
-google ACI API cheatsheet
 
 
 
