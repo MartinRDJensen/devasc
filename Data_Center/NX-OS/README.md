@@ -139,6 +139,21 @@ The following is an example of it in Python:
 
 **NOTE**: Through the NX-OS webserver? you can also generate python code from the cli command window. There is also the option of using Visore.
 
+## Specific for the NX-API REST
+
+General URL format is similar to the **ACI**:
+```
+<system>/api/[mo|class]/[dn|class][:method].[xml|json]?{options}
+```
+- *System*: System identifier; an IP address or DNS-resolvable host name
+- *mo | class*: Indication of whether this is a managed object or tree (MIT) or class-level query
+- *class*: Managed-object class (as specified in the information model) of the objects queried; the class name is represented as
+- *dn*: Distinguished name (unique hierarchical name of the object in the MIT tree) of the object queried
+- *method*: Optional indication of the method being invoked on the object; applies only to POST requests
+- *xml | json*: Encoding format
+- *options*: Query options, filters, and arguments
+
+
 
 
 
