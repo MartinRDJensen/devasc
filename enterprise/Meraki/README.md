@@ -78,7 +78,69 @@ There are **several camera APIs**:
 A user sees a captive portal (also known as a “splash page”) when they first associate with a Wi-Fi SSID and open a web browser to surf the internet. When you configure a captive portal, all internet traffic redirects to a specified URL.
 
 ## More On Meraki Dashboard API 
+Base URL is:
+```
+https://api.meraki.com/api/v1
+```
+The request header that should have the authorization is:
+```
+X-Cisco-Meraki-API-Key
+```
+To list the organizations you would use the resource url. This is done with the GET request method:
+```
+https://api.meraki.com/api/v1/organizations
+```
+To get the networks in an organiation then you can use the following API call:
+```
+https://api.meraki.com/api/v1/organizations/{{organizationId}}/networks
+```
+To further get the devices in a network you would use the follwing URL:
+```
+https://api.meraki.com/api/v1/networks/{{networkId}}/devices
+```
+To get network information you would use the following URL:
+```
+https://api.meraki.com/api/v1/networks/{{networkId}}
 
+#Result would be something like:
+{
+    "id": "L_566327653141856846",
+    "organizationId": "681155",
+    "type": "combined",
+    "productTypes": [
+        "switch",
+        "wireless"
+    ],
+    "name": "DevNetLab",
+    "timeZone": "America/New_York",
+    "tags": "",
+    "disableMyMerakiCom": false,
+    "disableRemoteStatusPage": true,
+    "enrollmentString": null
+}
+```
+To get device specific information we would use the serial number? The URL is the following:
+```
+https://api.meraki.com/api/v1/devices/{{serial}}
+
+#Would return something like:
+{
+    "lat": 37.4180951010362,
+    "lng": -122.098531723022,
+    "address": "",
+    "serial": "Q2KD-KWMU-7U92",
+    "mac": "e0:cb:bc:8c:1f:fe",
+    "lanIp": "192.168.128.5",
+    "networkId": "L_566327653141856846",
+    "model": "MR42",
+    "firmware": "wireless-25-13",
+    "floorPlanId": null
+}
+```
+Lastly, to get SSID information you would use the URL:
+```
+ttps://api.meraki.com/api/v1/networks/{{networkId}}/wireless/ssids
+```
 
 
 
