@@ -42,8 +42,7 @@ For the REST API you must pass the access key as the **X-Cloupia-Request-Key** h
 - Requests must contain a valid URL in either JSON or XML format.
     - For JSON format we have:
     ```
-    http://SERVER/app/api/rest?formatType=json&opName=operationName&opData=
-operationData
+    http://SERVER/app/api/rest?formatType=json&opName=operationName&opData=operationData
     ```
     - For XML format we have:
     ```
