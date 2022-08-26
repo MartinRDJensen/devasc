@@ -31,6 +31,24 @@ For the UCS Manager Python SDK there are 5 query methods:
 | query_dns | Returns a dictionary where the Dn is the key and the object is the value. If the Dn does not exist the value for that key will be None. |
 | query_childre | A list of zero or more objects |
 
+## UCS REST API
+### How to use the REST API
+The Cisoc UCS Director requires a valid Cisco UCS Directory accoutn and an API access key. It uses the key to authenticate API requests.
+
+For the REST API you must pass the access key as the **X-Cloupia-Request-Key** header.
+
+### Making a REST API Request
+- Requests are sent over HTTP
+- Requests must contain a valid URL in either JSON or XML format.
+    - For JSON format we have:
+    ```
+    http://SERVER/app/api/rest?formatType=json&opName=operationName&opData=
+operationData
+```
+    - For XML format we have:
+    ```
+    http://server/cloupia/api-v2/group
+    ```
 
 
 
