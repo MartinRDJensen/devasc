@@ -139,5 +139,13 @@ graph TD;
     /network-device-->/host
 ```
 
+The following is commonly used APIs of the Cisco DNA Center Platform:
+- *https://{}/api/system/v1/auth/token*, gets and encapsulates user identity and role information to make access-control decisions. Also used to get token?
+- *https://{}/api/v1/network-device*, gets the list of first 500 network devices sorted on hostname. Can be filtered using management IP address, mac addrses, hostname, location etc.
+- *https://{}/api/v1/interface*, gets every interface on every network device.
+- *https://{}/api/v1/host*, gets the hostname, the id of the vlan, the IP address and Mac address of the host, and the IP address of the network device to which the host is connected and much more.
+- *https://{}/api/v1/flow-analysis*, the path trace endpoint to trace a path between two IP addresses. Waits for analysis to complete and returns the results.
+
+
 
 
