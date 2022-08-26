@@ -48,8 +48,28 @@ For the REST API you must pass the access key as the **X-Cloupia-Request-Key** h
     ```
     http://server/cloupia/api-v2/group
     ```
+Following are some sample API Requests from the documentation:
+The operation that requests a Login profile refers to the logged-in user, so there is no need for a parameter. Most other operations need multiple arguments.
+```
+http://10.10.1.153/app/api/rest?formatType=json&opName=userAPIGetMyLoginProfile&opData={}
+```
+Response to Sample API Request:
+```
+{ "serviceResult":{"userId":"jsmith","firstName":"John","lastName":"Smith","email":
+"jsmith@example.com","groupName":"Eng Group","role":"Regular"}, "serviceError":null, 
+"serviceName":"InfraMgr", "opName":"userAPIGetMyLoginProfile" }
+```
 
+## Cisco Intersight REST API
+```
+https://www.intersight.com/api/v1/
+```
 
+Supported HTTP methods are, **GET, POST, PATCH, DELETE**. For the HTTP Request Header of Content-Type then when it is set it has to be one of the following values:
+- application/json
+- application/json-patch+json
+
+The resource that is used is specified in the Intersigt **Management Information Model** and we have the concept of **Managed objects (MOs)**. All resources will be decendants of the **mo.Mo** abstract class. Furhtermore, each managed object has a unique Moid identifier assigned to it when the resource is created.
 
 
 
