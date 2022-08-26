@@ -231,6 +231,7 @@ terraform {
 
 # Configure the provider with your Cisco APIC credentials.
 provider "aci" {
+  # Information to connect to the ACI APIC
   # APIC Username
   username = var.user.username
   # APIC Password
@@ -240,10 +241,46 @@ provider "aci" {
   insecure = true
 }
 ```
+The **var.user** part references variables defined in a **variable.tf** file:
+```
+variable "user" {
+  description = "Login information"
+  type        = map
+  default     = {
+    username = "admin"
+    password = "ciscopsdt"
+    url      = "https://sandboxapicdc.cisco.com"
+  }
+}
+```
+### Four Main Terraform Commands
+- *init*, initializes Terraform directory to be able to execute your plan. Downloads all defined providers in your main.tf file
+- *plan*, analyze main.tf file and compare it to the state of terraform.tfstate (if it exists) to determine what parts should be deployed, updated or destroyed.
+- *apply*, apply the changes described by the *plan* command to the third-party systems and update the *terraform.tfstate* file with current config state forthe resources described.
+- *destroy*, remove or unconfigure all resources previosuly deployed. The resources are tracked using the state file *terraform.tfstate*
 
+## Cisco Multi-Site Orchestrator (MSO) and Ansible
+Is responsible for provisioning, health monitoring, and managing the full lifecycle of Cisco ACI networking policies across all ACI fabric stires around the world. Both on-prem and in the cloud.
 
+Can be automated by using Ansible and there are 6 main MSO modules:
+- *Sites modules*: Manages "site" configurations, including tenants, schema, EPGs, VRFs, bridge domains, and policy configurations.
+- *Schemas modules*: Manage "schema template" configurations, including tenants, EPGs, VRFs, bridge domains, and policy configurations.
+- *Tenants modules*: Manage tenant configurations.
+- *Users modules*: The package currently supports managing users based on their roles and domains.
+- *Policies modules*: Manage DHCP policies (both option and relay).
+- *General Purpose modules*: Used for any feature that does not yet have a module. 
 
-
+The common MSO module parameters are the following:
+- *host*: hostname or IP of the MSO
+- *port*: TCP port number for the REST connection. 80 or 443 depends on the *use_ssl*.
+- *username*: The username to use to login to the MSO.
+- *password*: The password associated with the user's account.
+- *use_ssl*: Determines whether to use http or https. The default is https, but can be set to False to use http.
+- *use_proxy*: Determines the use of proxy. The default is True, but can be set to False.
+- *validate_certs*: Determines whether to validate the MSO's certificate against the server's known_hosts file. The default is True to validate, but can be set to False.
+- *output_level*: Influences the output of the module. Possible options are normal, info, and debug. The default is normal.
+- *timeout*: Specify the socket level timeout in seconds. The default is 30 seconds.
+- *login-domain*: Determines which external login domain to be used for authentication. The default is to use the Local authentication.
 
 
 
