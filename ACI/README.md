@@ -133,10 +133,10 @@ https://sandboxapicdc.cisco.com/visore.html
 
 The ACI API has **scoping filters** to expand the query to the children of a DN.
 
-#API Inspector
+### API Inspector
 Used to capture API requests being made to the controller. The APIC GUI is itself an API client and makes API requests to the underlying APIC controllers. The API Inspector allows you to sniff these requests to see which API calls are being made.
 
-#Cobra script structure
+### Cobra script structure
 - First step is to login which requires session and access modules
 ```
 # import statements
@@ -168,7 +168,7 @@ save_the_planet_app = session.query(app_query)
 
 print(save_the_planet_app[0].name) #returns the name 
 ```
-##ACI Websockets
+### ACI Websockets
 Enables bi-directional communication between two hosts.
 - enables the server to send and push messages to the client
 - use a single TCP connection for all communication
@@ -186,8 +186,8 @@ HTTP Method: GET
 URL: https://sandboxapicdc.cisco.com/api/mo/uni/tn-Heroes.json?subscription=yes
 ```
 
-##ACI and Ansible
-#Intro
+### ACI and Ansible
+#### Intro
 There are ACI modules for Ansible. The ACI Ansible modules work like you expect an Ansible Module to behave: they have fixed parameters that are used to connect to and configure the remote device. In this case, the Application Policy Infrastructure Controller of APIC. The ACI modules are idempotent and only push configurations when the module's parameters are different than what currently exists, and return back the status of the module's execution and what changes were made, if any.
 
 There are 4 main types of ACI modules:
