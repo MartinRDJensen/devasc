@@ -1,4 +1,8 @@
 # Following is the notes for the Cisco ACI Programmability
+The resource used for the document is the Cisco Learning Labs Center at:
+```
+https://developer.cisco.com/learning/tracks/aci-programmability/
+```
 
 ## Introduction to ACI Programmability
 ACI is Cisco's SDN solution for the data center.
