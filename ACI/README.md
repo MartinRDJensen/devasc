@@ -113,7 +113,7 @@ session.commit(config_request)
 
 Since the Cobra SDK is very complex there is APIC REST Python Adapter (Arya) which assists with generating a Python script using the Cobra libraries. Takes XML or JSON as input and outputs python code used to generate same configuration.
 
-#API URL
+### API URL
 The URL follows the following format:
 ```
 https(s)://host:port/api/{mo|class}/{dn|classname}.{xml|json}?[options]
@@ -125,7 +125,7 @@ The class names used by the MIT is:
 - fvAp is the Application
 - I3extOut is the L3 External Out
 
-#Visore
+### Visore
 Visore is an object-browser built into the APIC. Reached at:
 ```
 https://sandboxapicdc.cisco.com/visore.html
@@ -168,7 +168,7 @@ save_the_planet_app = session.query(app_query)
 
 print(save_the_planet_app[0].name) #returns the name 
 ```
-### ACI Websockets
+## ACI Websockets
 Enables bi-directional communication between two hosts.
 - enables the server to send and push messages to the client
 - use a single TCP connection for all communication
@@ -186,7 +186,7 @@ HTTP Method: GET
 URL: https://sandboxapicdc.cisco.com/api/mo/uni/tn-Heroes.json?subscription=yes
 ```
 
-### ACI and Ansible
+## ACI and Ansible
 #### Intro
 There are ACI modules for Ansible. The ACI Ansible modules work like you expect an Ansible Module to behave: they have fixed parameters that are used to connect to and configure the remote device. In this case, the Application Policy Infrastructure Controller of APIC. The ACI modules are idempotent and only push configurations when the module's parameters are different than what currently exists, and return back the status of the module's execution and what changes were made, if any.
 
