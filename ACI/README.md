@@ -68,6 +68,19 @@ Method: GET
 URL: https://sandboxapicdc.cisco.com/api/class/fvAp.json?
 ```
 
+#### Creating API Commands
+You can invoke an API command or query by sending an HTTP or HTTPS message to the APIC with a URI of this form for an operation on a managed object (MO):
+```
+{http | https}://host [:port] /api/mo/dn. {json | xml} [?options]
+```
+Use this form for an operation on an object class:
+```
+{http | https}://host [:port] /api/class/className. {json | xml} [?options]
+```
+
+The HTML body of a POST operation has to be ither JSON or XML that provides information necessary to execute the command.
+
+#### acitoolkit
 ACI has a toolkit called **acitoolkit** and the basic workflow is the following:
 ```
 from acitoolkit import acitoolkit
