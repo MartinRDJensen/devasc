@@ -1,0 +1,162 @@
+DNA Center Platform APIs and Programmability
+
+Design, policy, provision, assurance and platform
+Many tools
+Has an API Catalog
+
+Authentication:
+- POST request with your username and password
+- Receive token
+- "x-auth-token" header
+Base 64 enconding
+/dna/system/api/v1/auth/token
+/dna/intent/api/v1/network-devices # get a list of devices
+
+The DNA Center Plaform API has categories:
+- Know your network
+  - Sites
+  - Networks
+  - Devices
+  - Clients 
+- Site management
+- Operational Tools 
+- not yet written in
+Every object in DNA Center has an ID field which is a unique identifier 
+
+DNA Center Network Troubleshooting
+- Identify involved Hosts
+  - use the Host API, required inputs are hostname, IP addrs, Mac addrs, output compelte host details and network attachment point
+- Where are the hosts in the network
+  - Interface APi, Network Device API
+    takes either interface or network device ID
+    outputs interface or device information
+- What path does the traffic take
+  - Path trace API
+    input is source and dest IP
+    output path details such as number of hops, details per hop
+
+
+
+
+
+
+
+Understanding the ACI Programmability Options
+APIC controllers which provides the brains / management plane
+Spine and leaf switches. Nexus 9000 hardware in ACI mode
+
+UNI
+Tenant (networking / policy)
+
+ACI Object Model
+- starts with root. 
+- Tree structure, parent to many child objects. 
+- scope is important
+
+Relative vs Distinguished names
+- objects name related to siblings. RNs must be unique within parent object
+- DNs is a series of relative names up to "uni"
+- there are different prefixes. So a Tenant name would be prefixed with tn-
+  so something linke uni/tn-Heroes/ap-Save_The_Planet/epg-Web
+
+ACI Programmability Options
+- REST API
+  Pros: limitless options, any language / method
+  Cons: raw API syntax, session management, individual atomic actions
+- SDK is Cobra
+  two python packages acicobra and acimodel;
+	  download from the APIC controller https://apicaddr/cobra/_downloads
+  Pros: language wrapper of API, simplifies syntax and management
+  Cons: availability, atomic API interactions
+- Toolkits  ---- acitoolkit
+  from acitoolkit.acitoolkit import *
+  Pros: Less code, encapsulate common use cases
+  Cons: not 100% coverage, availability
+
+ACI designed as "API First"
+REST API
+- Leverages token based authentication
+- uses .json and .xml within URI instead of Content-Type and Accept headers to 
+  indicate data format
+- API will target specific class type or MO
+- Login request is a POST request to /api/aaaLogin.json
+
+Visore is a tool that allows you to navigate the object models and expose ACI REST API calls.
+
+ACI REST APU URI Construction
+https://<address>/api/<query type>/<identifier>.<format>[?<query params>]
+- api is the main entry point for ACI API REST requests
+- Query type is either
+  - class (query and return all instances of a given class)
+  - mo (target a specific instance of an object from the MIT)
+- IDENTIFIER
+  - class name or distinguished name
+- Format - identify XML or JSON
+
+GET, POST, DELETE?
+
+acitoolkit:
+- python libraries for working with the APIC controller
+- sample scripts 
+- Toolkit applications
+- clone the code from https://github.com/datacenter/acitoolkit cannot pip install
+- ACI Toolkit Object Models
+  - three areas of objects: 
+    - application topology object model
+    - interface object model
+    - physical topology model
+- Working with ACI Toolkit objects
+  query APIC for objects with Class.get() method
+	tenants = Tenant.get(session)
+  create new object instance of class
+  	new_tenant = Tenant("MyTenant")
+  attach objects with methods
+  	new_bd.add_context(new_vrf)
+  view native ACI object
+  	new_tenant.get_json()
+  Push updates to APIC
+  	session.push_to_apic(
+  	new_tenant.get_url(),
+	data = new_tenant.get_json())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Network Control in the Cloud - Developing with Cisco Meraki
+
+Meraki Cloud APIs
+- Dashboard;
+	- service providers can use it to provision customers, allocate devices, network templates, configure access for monitoring, add admin accounts for NOC staff and or end customer access.
+	- Enterprises can use it for network automation. Automation of large deployment projects, teleworker on and off boarding, configure networks with tempaltes, build own custom dashboards with limited access
+	- To enable it Org > settings > enable API access
+	  Then generate API key	
+	- https://dashboard.meraki.com/api_docs
+- Scanning 
+- Captive Portal
+- MV Camera Sense
+
+Calls uses the X-Cisco-Meraki-API-Key header
+
+
+
+
+
+
+
+
+
+
+
+
