@@ -98,8 +98,31 @@ FDM/FTP API Key functionality
 - System Settings
 - and more
 
+## Firepower Management Center API
+You have to enable API access on the FMC.
 
+### Authentication
+Then to use it you have to retrieve an authentication token. This is done by using a GET request along with username and password of the API user. The URL to use is the following:
+```
+https://<management_center_IP_or_name>/api/fmc_platform/v1/auth/generatetoken
+```
+where the username and password are included as a basic authentication header.
 
+In the output of the response you will receive 3 tings:
+_ The header X-auth-access-token:<authentication token value> which is to be used in requests to the API.
+- The headers X-auth-access-token:<authentication token value> and X-auth-refresh-token:<refresh token value> is used to refresh the token.
+- Use the Domain_UUID from the authentication token in all REST requests to the server.
+
+**Token refreshing**
+The token will be valid for 30 minutes and can be refreshed 3 times by sending POST requests to :
+```
+https://<management_center_IP_or_name>/api/fmc_platform/v1/auth/refreshtoken
+```
+and adding the token and refresh token in the header:
+```
+X-auth-access-token:<authentication token value>
+X-auth-refresh-token:<refresh token value>
+```
 
 
 
